@@ -2,14 +2,46 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestXamarin.Views.MainPage"
-             xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+           
              Title="{Binding Title}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <syncfusion:SfDataGrid ItemsSource="{Binding TaskList}" Grid.Row="0" DefaultColumnWidth="100"></syncfusion:SfDataGrid>   
+        <Grid Grid.Row="0" BackgroundColor="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="170"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Description" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="20" TextColor="Black"></Label>
+            <Label Grid.Column="1" Text="Due date" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="20" TextColor="Black"></Label>
+        </Grid>
+        
+        <ListView x:Name="lstName"
+          Grid.Row="1" 
+          Grid.Column="0" 
+          ItemsSource="{Binding TaskList,Mode=TwoWay}"
+          BackgroundColor="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid RowSpacing="1" Padding="5,15,5,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Description}" Font="12" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding DueDate}" Font="12" VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid> 
 </ContentPage>

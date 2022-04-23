@@ -32,6 +32,9 @@ namespace TestXamarin.ViewModels
             TaskList = new ObservableCollection<Task>();
             Title = "The TODO list ";
             TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task("Skuhaj kosiloSkuhaj kosilo", new DateTime(2022, 4, 20)));
         }
     }
 }
