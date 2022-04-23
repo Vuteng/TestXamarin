@@ -11,6 +11,8 @@ namespace TestXamarin.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        public DelegateCommand AddNewTaskCommand { get; private set; }
+
         private ObservableCollection<Task> _taskList;
         public ObservableCollection<Task> TaskList
         {
@@ -30,11 +32,26 @@ namespace TestXamarin.ViewModels
             : base(navigationService)
         {
             TaskList = new ObservableCollection<Task>();
+
             Title = "The TODO list ";
+
+            AddNewTaskCommand = new DelegateCommand(AddNewTaskExecute, CanAddNewTask);
+
             TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
             TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
             TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
             TaskList.Add(new Task("Skuhaj kosiloSkuhaj kosilo", new DateTime(2022, 4, 20)));
         }
+
+        void AddNewTaskExecute()
+        {
+
+        }
+
+        bool CanAddNewTask()
+        {
+            return true;
+        }
     }
 }
+

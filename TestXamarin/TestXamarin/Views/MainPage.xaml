@@ -19,7 +19,7 @@
             <Label Grid.Column="0" Text="Description" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="20" TextColor="Black"></Label>
             <Label Grid.Column="1" Text="Due date" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="20" TextColor="Black"></Label>
         </Grid>
-        
+
         <ListView x:Name="lstName"
           Grid.Row="1" 
           Grid.Column="0" 
@@ -43,5 +43,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackLayout Grid.Row="3" >
+            <Button Text="Add new Task" Command="{Binding AddNewTaskCommand}"></Button>
+        </StackLayout>
     </Grid> 
 </ContentPage>
