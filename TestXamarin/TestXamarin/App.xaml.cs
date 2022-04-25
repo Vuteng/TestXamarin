@@ -28,7 +28,7 @@ namespace TestXamarin
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<AddNewTaskView, AddNewTaskViewViewModel>();
+            containerRegistry.RegisterForNavigation<AddNewTaskView, AddNewTaskViewModel>();
         }
     }
 }

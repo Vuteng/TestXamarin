@@ -45,7 +45,7 @@ namespace TestXamarin.ViewModels
 
         void AddNewTaskExecute()
         {
-
+            NavigationService.NavigateAsync("NavigationPage/AddNewTaskView");
         }
 
         bool CanAddNewTask()

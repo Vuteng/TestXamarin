@@ -1,14 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                  xmlns:prism="http://prismlibrary.com"
-                  prism:ViewModelLocator.AutowireViewModel="True"
-                  x:Class="TestXamarin.Views.AddNewTaskView">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestXamarin.Views.AddNewTaskView"
+             xmlns:Prism="http://prismlibrary.com"
+             Prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Description: " Grid.Column="1" Grid.Row="0" FontSize="Large" TextColor="Black"/>
+        <Label Text="Details: " Grid.Column="1" Grid.Row="1" FontSize="Large" TextColor="Black"/>
+        <Label Text="Due Date: " Grid.Column="1" Grid.Row="3" FontSize="Large" TextColor="Black"/>
+
+        <Entry Grid.Column="2" Grid.Row="0" MaxLength="30" Placeholder="Description" WidthRequest="200" IsSpellCheckEnabled="False"></Entry>
+        <Editor Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"  Placeholder="Details" AutoSize="TextChanges" ></Editor>
+        <DatePicker Grid.Column="2" Grid.Row="3" WidthRequest="200"></DatePicker>
+
+        <StackLayout Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal">
+            <Button Text="Add Task" Command="{Binding AddCommand}" IsVisible="{Binding Adding}"/>
+            <Button Text="remove task" Command="{Binding RemoveCommand}" IsVisible="{Binding Deleting}"/>
+        </StackLayout>
 
 
-    <StackLayout Padding="20">
-        <!-- TODO: // Update the Layout and add some real menu items  -->
-        <Button Text="ViewA" Command="{Binding NavigateCommand}" CommandParameter="ViewA" />
-    </StackLayout>
-
+    </Grid>
 </ContentPage>
