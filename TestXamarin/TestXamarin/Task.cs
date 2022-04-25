@@ -10,7 +10,7 @@ namespace TestXamarin
     {
         private string _description;
         private DateTime _dueDate;
-
+        private string _details;
         public string Description
         {
             get { return _description; }
@@ -20,6 +20,18 @@ namespace TestXamarin
                 {
                     _description = value;
                     OnPropertyChanged("Description");
+                }
+            }
+        }
+        public string Details
+        {
+            get { return _details; }
+            set
+            {
+                if (_details != value)
+                {
+                    _details = value;
+                    OnPropertyChanged("Details");
                 }
             }
         }
@@ -36,10 +48,11 @@ namespace TestXamarin
             }
         }
 
-        public Task(string desc, DateTime dateTime)
+        public Task(string desc, string details, DateTime dateTime)
         {
             Description = desc;
             DueDate = dateTime;
+            Details = details;
         }
 
     }
