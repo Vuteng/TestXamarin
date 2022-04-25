@@ -11,6 +11,7 @@ namespace TestXamarin.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        private INavigationService _navigationService;
         public DelegateCommand AddNewTaskCommand { get; private set; }
 
         private ObservableCollection<Task> _taskList;
@@ -31,27 +32,30 @@ namespace TestXamarin.ViewModels
         public MainPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
+            _navigationService = navigationService;
+
             TaskList = new ObservableCollection<Task>();
 
             Title = "The TODO list ";
 
             AddNewTaskCommand = new DelegateCommand(AddNewTaskExecute, CanAddNewTask);
 
-            TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task("Skuhaj kosilo", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task("Skuhaj kosiloSkuhaj kosilo", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task("Skuhaj kosilo","", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task("Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task("Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task("Skuhaj kosiloSkuhaj kosilo", "", new DateTime(2022, 4, 20)));
+
         }
 
         void AddNewTaskExecute()
         {
-            NavigationService.NavigateAsync("NavigationPage/AddNewTaskView");
+            var navParams = new NavigationParameters();
+            navParams.Add("Adding", TaskList);
+
+            _navigationService.NavigateAsync("AddNewTaskView", navParams);
         }
 
-        bool CanAddNewTask()
-        {
-            return true;
-        }
+        bool CanAddNewTask() => true;
     }
 }
 
