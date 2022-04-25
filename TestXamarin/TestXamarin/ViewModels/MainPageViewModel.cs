@@ -13,8 +13,29 @@ namespace TestXamarin.ViewModels
     {
         private INavigationService _navigationService;
         public DelegateCommand AddNewTaskCommand { get; private set; }
-
+        public DelegateCommand ItemTappedCommand { get; private set; }
         private ObservableCollection<Task> _taskList;
+
+        Task _selectedTask;
+        
+        public Task SelectedTask
+        {
+            get => _selectedTask;
+            set
+            {
+                if(value != null)
+                {
+                    var navParams = new NavigationParameters();
+                    navParams.Add("DetailedView", value);
+                    _navigationService.NavigateAsync("AddNewTaskView", navParams);
+                    value = null;
+                }
+                _selectedTask = value;
+                OnPropertyChanged("SelectedTask");
+            }
+        }
+
+
         public ObservableCollection<Task> TaskList
         {
             get { return _taskList; }
@@ -39,6 +60,7 @@ namespace TestXamarin.ViewModels
             Title = "The TODO list ";
 
             AddNewTaskCommand = new DelegateCommand(AddNewTaskExecute, CanAddNewTask);
+            ItemTappedCommand = new DelegateCommand(ItemTappedExecute, CanItemTap);
 
             TaskList.Add(new Task("Skuhaj kosilo","", new DateTime(2022, 4, 20)));
             TaskList.Add(new Task("Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
@@ -56,6 +78,12 @@ namespace TestXamarin.ViewModels
         }
 
         bool CanAddNewTask() => true;
+        void ItemTappedExecute()
+        {
+            Console.WriteLine("ala");
+        }
+
+        bool CanItemTap() => true;
     }
 }
 

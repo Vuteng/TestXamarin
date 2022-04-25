@@ -1,4 +1,6 @@
 ﻿
+using Prism.Navigation;
+
 namespace TestXamarin.Views
 {
     public partial class MainPage
@@ -7,5 +9,9 @@ namespace TestXamarin.Views
         {
             InitializeComponent();
         }
+
+       
+
+        
     }
 }

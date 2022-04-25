@@ -25,7 +25,8 @@
           Grid.Row="1" 
           Grid.Column="0" 
           ItemsSource="{Binding TaskList,Mode=TwoWay}"
-          BackgroundColor="White">
+          BackgroundColor="White"
+          SelectedItem="{Binding SelectedTask}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -40,6 +41,7 @@
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Description}" Font="12" HorizontalTextAlignment="Center"/>
                             <Label Grid.Row="0" Grid.Column="1" Text="{Binding DueDate}" Font="12" VerticalTextAlignment="Center"/>
                         </Grid>
+                        
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

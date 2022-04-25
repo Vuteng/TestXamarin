@@ -12,10 +12,11 @@ namespace TestXamarin.ViewModels
         private string _description;
         private string _details;
         private DateTime _dueDate;
+        Task _selectedTask;
+        INavigationService _navigationService;
 
         private ObservableCollection<Task> _taskList;
         public DelegateCommand AddCommand { get; private set; }
-        INavigationService _navigationService;
 
         public ObservableCollection<Task> TaskList
         {
@@ -61,7 +62,7 @@ namespace TestXamarin.ViewModels
                 if (_dueDate != value)
                 {
                     _dueDate = value;
-                    OnPropertyChanged("DateTime");
+                    OnPropertyChanged("DueDate");
                 }
             }
         }
@@ -79,12 +80,15 @@ namespace TestXamarin.ViewModels
 
             if (parameters.ContainsKey("Adding"))
             {
-                Title = "Add new task";
                 TaskList = (ObservableCollection<Task>)parameters["Adding"];
+
             }
-            else if(parameters.ContainsKey("Details"))
+            else if(parameters.ContainsKey("DetailedView"))
             {
-                Title = "Info about task";
+                _selectedTask = (Task)parameters["DetailedView"];
+                Description = _selectedTask.Description;
+                Details = _selectedTask.Details;
+                DueDate = _selectedTask.DueDate;
             }
         }
 
