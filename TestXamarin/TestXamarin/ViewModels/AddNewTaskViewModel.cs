@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Android.Opengl;
+using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,14 @@ namespace TestXamarin.ViewModels
 {
     public class AddNewTaskViewModel : ViewModelBase
     {
+        Task _selectedTask;
+        INavigationService _navigationService;
+        bool _adding;
+        bool _deleting;
+
         private string _description;
         private string _details;
         private DateTime _dueDate;
-        Task _selectedTask;
-        INavigationService _navigationService;
-
         private ObservableCollection<Task> _taskList;
         public DelegateCommand AddCommand { get; private set; }
 
@@ -67,6 +70,31 @@ namespace TestXamarin.ViewModels
             }
         }
 
+        public bool Adding
+        {
+            get { return _adding; }
+            set
+            {
+                if (_adding != value)
+                {
+                    _adding = value;
+                    OnPropertyChanged("Adding");
+                }
+            }
+        }
+        public bool Deleting
+        {
+            get { return _deleting; }
+            set
+            {
+                if (_deleting != value)
+                {
+                    _deleting = value;
+                    OnPropertyChanged("Deleting");
+                }
+            }
+        }
+
         public AddNewTaskViewModel(INavigationService navigationService) : base(navigationService)
         {
             AddCommand = new DelegateCommand(AddExecute, CanAdd);
@@ -81,14 +109,20 @@ namespace TestXamarin.ViewModels
             if (parameters.ContainsKey("Adding"))
             {
                 TaskList = (ObservableCollection<Task>)parameters["Adding"];
+                Deleting = false;
+                Adding = true;
 
             }
             else if(parameters.ContainsKey("DetailedView"))
             {
                 _selectedTask = (Task)parameters["DetailedView"];
+
                 Description = _selectedTask.Description;
                 Details = _selectedTask.Details;
                 DueDate = _selectedTask.DueDate;
+
+                Deleting = true;
+                Adding = false;
             }
         }
 
