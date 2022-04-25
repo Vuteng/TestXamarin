@@ -27,6 +27,7 @@ namespace TestXamarin.ViewModels
                 {
                     var navParams = new NavigationParameters();
                     navParams.Add("DetailedView", value);
+                    navParams.Add("List", TaskList);
                     _navigationService.NavigateAsync("AddNewTaskView", navParams);
                     value = null;
                 }

@@ -20,6 +20,7 @@ namespace TestXamarin.ViewModels
         private DateTime _dueDate;
         private ObservableCollection<Task> _taskList;
         public DelegateCommand AddCommand { get; private set; }
+        public DelegateCommand DeleteCommand { get; private set; }
 
         public ObservableCollection<Task> TaskList
         {
@@ -98,6 +99,7 @@ namespace TestXamarin.ViewModels
         public AddNewTaskViewModel(INavigationService navigationService) : base(navigationService)
         {
             AddCommand = new DelegateCommand(AddExecute, CanAdd);
+            DeleteCommand = new DelegateCommand(DeleteExecute, CanDelete);
             _navigationService = navigationService;
         }
 
@@ -116,6 +118,7 @@ namespace TestXamarin.ViewModels
             else if(parameters.ContainsKey("DetailedView"))
             {
                 _selectedTask = (Task)parameters["DetailedView"];
+                TaskList = (ObservableCollection<Task>)parameters["List"];
 
                 Description = _selectedTask.Description;
                 Details = _selectedTask.Details;
@@ -129,13 +132,21 @@ namespace TestXamarin.ViewModels
 
         void AddExecute()
         {
-            Console.WriteLine(Description + " " + Details + "  " + DueDate.ToString());
             TaskList.Add(new Task(Description, Details, DueDate));
-            _navigationService.GoBackAsync();
 
+            _navigationService.GoBackAsync();
         }
 
-        bool CanAdd() => true;
+        bool CanAdd() => true; 
+        void DeleteExecute()
+        {
+
+            TaskList.Remove(_selectedTask);
+
+            _navigationService.GoBackAsync();
+        }
+
+        bool CanDelete() => true;
     }
 }
 
