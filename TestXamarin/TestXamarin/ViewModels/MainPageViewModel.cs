@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using DryIoc;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -11,9 +12,9 @@ namespace TestXamarin.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        private IDatabase _database;
         private INavigationService _navigationService;
         public DelegateCommand AddNewTaskCommand { get; private set; }
-        public DelegateCommand ItemTappedCommand { get; private set; }
         private ObservableCollection<Tasks> _taskList;
 
         Tasks _selectedTask;
@@ -28,14 +29,13 @@ namespace TestXamarin.ViewModels
                     var navParams = new NavigationParameters();
                     navParams.Add("DetailedView", value);
                     navParams.Add("List", TaskList);
-                    _navigationService.NavigateAsync("AddNewTaskView", navParams);
+                    _navigationService.NavigateAsync("DetailedTaskView", navParams);
                     value = null;
                 }
                 _selectedTask = value;
                 OnPropertyChanged("SelectedTask");
             }
         }
-
 
         public ObservableCollection<Tasks> TaskList
         {
@@ -51,23 +51,23 @@ namespace TestXamarin.ViewModels
         }
 
 
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel(INavigationService navigationService, IContainer container)
             : base(navigationService)
         {
             _navigationService = navigationService;
+            _database = container.Resolve<IDatabase>();
 
-            TaskList = new ObservableCollection<Tasks>();
+            try
+            {
+                LoadListAsync();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());   
+            }
 
             Title = "The TODO list ";
 
-            AddNewTaskCommand = new DelegateCommand(AddNewTaskExecute, CanAddNewTask);
-            ItemTappedCommand = new DelegateCommand(ItemTappedExecute, CanItemTap);
-
-            TaskList.Add(new Tasks(TaskList.Count + 1, "Skuhaj kosilo","", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Tasks(TaskList.Count + 1, "Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Tasks(TaskList.Count + 1, "Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Tasks(TaskList.Count + 1, "Skuhaj kosiloSkuhaj kosilo", "", new DateTime(2022, 4, 20)));
-
+            AddNewTaskCommand = new DelegateCommand(AddNewTaskExecute, CanAddNewTask);    
         }
 
         void AddNewTaskExecute()
@@ -79,12 +79,13 @@ namespace TestXamarin.ViewModels
         }
 
         bool CanAddNewTask() => true;
-        void ItemTappedExecute()
-        {
-            Console.WriteLine("ala");
-        }
 
-        bool CanItemTap() => true;
+        async void LoadListAsync()
+        {
+            List<Tasks> tmp = await _database.GetTaskAsync();
+            TaskList = new ObservableCollection<Tasks>(tmp);
+           
+        }
     }
 }
 

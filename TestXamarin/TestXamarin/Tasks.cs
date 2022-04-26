@@ -9,9 +9,9 @@ namespace TestXamarin
 {
     public class Tasks : ClassBase
     { 
-        private int _id;
-        private string _description;
-        private DateTime _dueDate;
+        public int _id;
+        public string _description;
+        public DateTime _dueDate;
         private string _details;
         public string Description
         {
@@ -68,7 +68,7 @@ namespace TestXamarin
 
         }
 
-        public Tasks(int ID, string desc, string details, DateTime dateTime)
+        public Tasks(string desc, string details, DateTime dateTime)
         {
             Description = desc;
             DueDate = dateTime;

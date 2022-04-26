@@ -1,4 +1,5 @@
 ﻿using Android.Opengl;
+using DryIoc;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -10,18 +11,14 @@ namespace TestXamarin.ViewModels
 {
     public class AddNewTaskViewModel : ViewModelBase
     {
-        Tasks _selectedTask;
         INavigationService _navigationService;
-        bool _adding;
-        bool _deleting;
-
+        private static IDatabase _database;
         private string _description;
         private string _details;
         private DateTime _dueDate;
         private ObservableCollection<Tasks> _taskList;
         public DelegateCommand AddCommand { get; private set; }
         public DelegateCommand DeleteCommand { get; private set; }
-
         public ObservableCollection<Tasks> TaskList
         {
             get { return _taskList; }
@@ -71,49 +68,12 @@ namespace TestXamarin.ViewModels
             }
         }
 
-        public bool Adding
-        {
-            get { return _adding; }
-            set
-            {
-                if (_adding != value)
-                {
-                    _adding = value;
-                    OnPropertyChanged("Adding");
-                }
-            }
-        }
-        public bool Deleting
-        {
-            get { return _deleting; }
-            set
-            {
-                if (_deleting != value)
-                {
-                    _deleting = value;
-                    OnPropertyChanged("Deleting");
-                }
-            }
-        }
-
-        public Tasks SelectedTask
-        {
-            get { return _selectedTask; }
-            set
-            {
-                if (_selectedTask != value)
-                {
-                    _selectedTask = value;
-                    OnPropertyChanged("SelectedTask");
-                }
-            }
-        }
-
-        public AddNewTaskViewModel(INavigationService navigationService) : base(navigationService)
+      
+        public AddNewTaskViewModel(INavigationService navigationService, IContainer container) : base(navigationService)
         {
             AddCommand = new DelegateCommand(AddExecute, CanAdd);
-            DeleteCommand = new DelegateCommand(DeleteExecute, CanDelete);
             _navigationService = navigationService;
+            _database = container.Resolve<IDatabase>(); 
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -121,41 +81,19 @@ namespace TestXamarin.ViewModels
             if (parameters == null)
                 return;
 
-            if (parameters.ContainsKey("Adding"))
-            {
-                TaskList = (ObservableCollection<Tasks>)parameters["Adding"];
-                Deleting = false;
-                Adding = true;
-
-            }
-            else if(parameters.ContainsKey("DetailedView"))
-            {
-                SelectedTask = (Tasks)parameters["DetailedView"];
-                TaskList = (ObservableCollection<Tasks>)parameters["List"];
-
-                Deleting = true;
-                Adding = false;
-            }
+            TaskList = (ObservableCollection<Tasks>)parameters["Adding"];      
         }
 
 
         void AddExecute()
         {
-            TaskList.Add(new Tasks(TaskList.Count + 1, Description, Details, DueDate)) ;
-
+            TaskList.Add(new Tasks(Description, Details, DueDate)) ;
+            _database.SaveTaskAsync(TaskList[TaskList.Count - 1]);
             _navigationService.GoBackAsync();
         }
 
         bool CanAdd() => true; 
-        void DeleteExecute()
-        {
-
-            TaskList.Remove(_selectedTask);
-
-            _navigationService.GoBackAsync();
-        }
-
-        bool CanDelete() => true;
+      
     }
 }
 

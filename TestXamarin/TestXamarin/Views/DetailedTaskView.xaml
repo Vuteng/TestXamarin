@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TestXamarin.Views.AddNewTaskView"
+             x:Class="TestXamarin.Views.DetailedTaskView"
              xmlns:Prism="http://prismlibrary.com"
              Prism:ViewModelLocator.AutowireViewModel="True"
              Title="{Binding Title}">
@@ -25,12 +25,13 @@
         <Label Text="Details: " Grid.Column="1" Grid.Row="1" FontSize="Large" TextColor="Black"/>
         <Label Text="Due Date: " Grid.Column="1" Grid.Row="3" FontSize="Large" TextColor="Black"/>
 
-        <Entry Grid.Column="2" Grid.Row="0" MaxLength="30" Placeholder="Description" WidthRequest="200" IsSpellCheckEnabled="False" Text="{Binding Description}"></Entry>
-        <Editor Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"  Placeholder="Details" AutoSize="TextChanges" Text="{Binding Details}"></Editor>
-        <DatePicker Grid.Column="2" Grid.Row="3" WidthRequest="200" Date="{Binding DueDate}"></DatePicker>
+        <Entry Grid.Column="2" Grid.Row="0" MaxLength="30" Placeholder="Description" WidthRequest="200" IsSpellCheckEnabled="False" Text="{Binding SelectedTask.Description}"></Entry>
+        <Editor Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"  Placeholder="Details" AutoSize="TextChanges" Text="{Binding SelectedTask.Details}"></Editor>
+        <DatePicker Grid.Column="2" Grid.Row="3" WidthRequest="200" Date="{Binding SelectedTask.DueDate}"></DatePicker>
 
         <StackLayout Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal">
-            <Button Text="Add Task" Command="{Binding AddCommand}"/>
+            <Button Text="remove task" Command="{Binding DeleteCommand}"/>
+            <Button Text="update task" Command="{Binding UpdateCommand}"/>
         </StackLayout>
 
 

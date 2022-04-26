@@ -1,4 +1,5 @@
 using Prism;
+
 using Prism.Ioc;
 using TestXamarin.ViewModels;
 using TestXamarin.Views;
@@ -18,17 +19,19 @@ namespace TestXamarin
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            
+
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
-        {
+        { 
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
-
+            containerRegistry.RegisterSingleton<IDatabase, Database>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<AddNewTaskView, AddNewTaskViewModel>();
+            containerRegistry.RegisterForNavigation<DetailedTaskView, DetailedTaskViewModel>();
         }
+
     }
 }
