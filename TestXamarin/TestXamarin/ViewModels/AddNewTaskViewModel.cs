@@ -17,8 +17,7 @@ namespace TestXamarin.ViewModels
         private string _details;
         private DateTime _dueDate;
         private ObservableCollection<Tasks> _taskList;
-        public DelegateCommand AddCommand { get; private set; }
-        public DelegateCommand DeleteCommand { get; private set; }
+        public DelegateCommand AddCommand { get; private set; } 
         public ObservableCollection<Tasks> TaskList
         {
             get { return _taskList; }
