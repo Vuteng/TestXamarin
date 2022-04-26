@@ -18,7 +18,7 @@ namespace TestXamarin
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
+            
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 

@@ -10,7 +10,7 @@ namespace TestXamarin.ViewModels
 {
     public class AddNewTaskViewModel : ViewModelBase
     {
-        Task _selectedTask;
+        Tasks _selectedTask;
         INavigationService _navigationService;
         bool _adding;
         bool _deleting;
@@ -18,11 +18,11 @@ namespace TestXamarin.ViewModels
         private string _description;
         private string _details;
         private DateTime _dueDate;
-        private ObservableCollection<Task> _taskList;
+        private ObservableCollection<Tasks> _taskList;
         public DelegateCommand AddCommand { get; private set; }
         public DelegateCommand DeleteCommand { get; private set; }
 
-        public ObservableCollection<Task> TaskList
+        public ObservableCollection<Tasks> TaskList
         {
             get { return _taskList; }
             set
@@ -96,7 +96,7 @@ namespace TestXamarin.ViewModels
             }
         }
 
-        public Task SelectedTask
+        public Tasks SelectedTask
         {
             get { return _selectedTask; }
             set
@@ -123,15 +123,15 @@ namespace TestXamarin.ViewModels
 
             if (parameters.ContainsKey("Adding"))
             {
-                TaskList = (ObservableCollection<Task>)parameters["Adding"];
+                TaskList = (ObservableCollection<Tasks>)parameters["Adding"];
                 Deleting = false;
                 Adding = true;
 
             }
             else if(parameters.ContainsKey("DetailedView"))
             {
-                SelectedTask = (Task)parameters["DetailedView"];
-                TaskList = (ObservableCollection<Task>)parameters["List"];
+                SelectedTask = (Tasks)parameters["DetailedView"];
+                TaskList = (ObservableCollection<Tasks>)parameters["List"];
 
                 Deleting = true;
                 Adding = false;
@@ -141,7 +141,7 @@ namespace TestXamarin.ViewModels
 
         void AddExecute()
         {
-            TaskList.Add(new Task(TaskList.Count + 1, Description, Details, DueDate)) ;
+            TaskList.Add(new Tasks(TaskList.Count + 1, Description, Details, DueDate)) ;
 
             _navigationService.GoBackAsync();
         }

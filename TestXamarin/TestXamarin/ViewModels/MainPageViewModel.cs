@@ -14,11 +14,11 @@ namespace TestXamarin.ViewModels
         private INavigationService _navigationService;
         public DelegateCommand AddNewTaskCommand { get; private set; }
         public DelegateCommand ItemTappedCommand { get; private set; }
-        private ObservableCollection<Task> _taskList;
+        private ObservableCollection<Tasks> _taskList;
 
-        Task _selectedTask;
+        Tasks _selectedTask;
         
-        public Task SelectedTask
+        public Tasks SelectedTask
         {
             get => _selectedTask;
             set
@@ -37,7 +37,7 @@ namespace TestXamarin.ViewModels
         }
 
 
-        public ObservableCollection<Task> TaskList
+        public ObservableCollection<Tasks> TaskList
         {
             get { return _taskList; }
             set
@@ -56,17 +56,17 @@ namespace TestXamarin.ViewModels
         {
             _navigationService = navigationService;
 
-            TaskList = new ObservableCollection<Task>();
+            TaskList = new ObservableCollection<Tasks>();
 
             Title = "The TODO list ";
 
             AddNewTaskCommand = new DelegateCommand(AddNewTaskExecute, CanAddNewTask);
             ItemTappedCommand = new DelegateCommand(ItemTappedExecute, CanItemTap);
 
-            TaskList.Add(new Task(TaskList.Count + 1, "Skuhaj kosilo","", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task(TaskList.Count + 1, "Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task(TaskList.Count + 1, "Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task(TaskList.Count + 1, "Skuhaj kosiloSkuhaj kosilo", "", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Tasks(TaskList.Count + 1, "Skuhaj kosilo","", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Tasks(TaskList.Count + 1, "Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Tasks(TaskList.Count + 1, "Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Tasks(TaskList.Count + 1, "Skuhaj kosiloSkuhaj kosilo", "", new DateTime(2022, 4, 20)));
 
         }
 
