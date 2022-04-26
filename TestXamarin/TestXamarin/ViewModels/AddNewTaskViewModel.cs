@@ -133,10 +133,6 @@ namespace TestXamarin.ViewModels
                 SelectedTask = (Task)parameters["DetailedView"];
                 TaskList = (ObservableCollection<Task>)parameters["List"];
 
-                //Description = _selectedTask.Description;
-                //Details = _selectedTask.Details;
-                //DueDate = _selectedTask.DueDate;
-
                 Deleting = true;
                 Adding = false;
             }
