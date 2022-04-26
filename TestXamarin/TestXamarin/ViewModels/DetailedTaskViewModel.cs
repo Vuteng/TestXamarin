@@ -93,8 +93,9 @@ namespace TestXamarin.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                _navigationService.GoBackAsync();
             }
+            _navigationService.GoBackAsync();
+
         }
         bool CanUpdate() => true;
     }
