@@ -7,8 +7,8 @@ using TestXamarin.ViewModels;
 
 namespace TestXamarin
 {
-    public class Tasks : ClassBase
-    { 
+    public class Tasks : ClassBase, ITasks
+    {
         public int _id;
         public string _description;
         public DateTime _dueDate;

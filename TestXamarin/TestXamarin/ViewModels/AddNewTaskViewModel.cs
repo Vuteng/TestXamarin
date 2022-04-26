@@ -12,6 +12,7 @@ namespace TestXamarin.ViewModels
     public class AddNewTaskViewModel : ViewModelBase
     {
         INavigationService _navigationService;
+        IContainer _container;
         private static IDatabase _database;
         private string _description;
         private string _details;
@@ -73,6 +74,7 @@ namespace TestXamarin.ViewModels
             AddCommand = new DelegateCommand(AddExecute, CanAdd);
             _navigationService = navigationService;
             _database = container.Resolve<IDatabase>(); 
+            _container = container;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -86,7 +88,12 @@ namespace TestXamarin.ViewModels
 
         void AddExecute()
         {
-            TaskList.Add(new Tasks(Description, Details, DueDate));
+            Tasks helperTask = (Tasks)_container.Resolve<ITasks>();
+            helperTask.Description = Description;
+            helperTask.Details = Details;
+            helperTask.DueDate = DueDate;
+
+            TaskList.Add(helperTask);
             try
             {
                 _database.SaveTaskAsync(TaskList[TaskList.Count - 1]);

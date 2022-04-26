@@ -14,12 +14,7 @@ namespace TestXamarin.ViewModels
     {
         Tasks _selectedTask;
         INavigationService _navigationService;
-
-
         private static IDatabase _database;
-        private string _description;
-        private string _details;
-        private DateTime _dueDate;
         private ObservableCollection<Tasks> _taskList;
         public DelegateCommand DeleteCommand { get; private set; }
         public DelegateCommand UpdateCommand { get; private set; }

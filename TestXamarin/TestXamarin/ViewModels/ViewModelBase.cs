@@ -11,7 +11,7 @@ namespace TestXamarin.ViewModels
     public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible, INotifyPropertyChanged
     {
         protected INavigationService NavigationService { get; private set; }
-
+        public event PropertyChangedEventHandler PropertyChanged;
         private string _title;
         public string Title
         {
@@ -43,8 +43,6 @@ namespace TestXamarin.ViewModels
         {
 
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

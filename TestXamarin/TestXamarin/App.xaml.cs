@@ -27,6 +27,7 @@ namespace TestXamarin
         { 
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterSingleton<IDatabase, Database>();
+            containerRegistry.Register<ITasks, Tasks>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<AddNewTaskView, AddNewTaskViewModel>();
