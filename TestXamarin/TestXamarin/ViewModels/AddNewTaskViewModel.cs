@@ -86,8 +86,14 @@ namespace TestXamarin.ViewModels
 
         void AddExecute()
         {
-            TaskList.Add(new Tasks(Description, Details, DueDate)) ;
-            _database.SaveTaskAsync(TaskList[TaskList.Count - 1]);
+            TaskList.Add(new Tasks(Description, Details, DueDate));
+            try
+            {
+                _database.SaveTaskAsync(TaskList[TaskList.Count - 1]);
+            }catch(Exception ex)
+            {
+               Console.WriteLine(ex.Message);
+            }
             _navigationService.GoBackAsync();
         }
 

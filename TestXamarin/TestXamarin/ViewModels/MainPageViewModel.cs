@@ -62,7 +62,7 @@ namespace TestXamarin.ViewModels
                 LoadListAsync();
             }catch(Exception ex)
             {
-                Console.WriteLine(ex.ToString());   
+                Console.WriteLine(ex.Message);   
             }
 
             Title = "The TODO list ";
@@ -82,9 +82,15 @@ namespace TestXamarin.ViewModels
 
         async void LoadListAsync()
         {
-            List<Tasks> tmp = await _database.GetTaskAsync();
-            TaskList = new ObservableCollection<Tasks>(tmp);
-           
+            try
+            {
+                List<Tasks> tmp = await _database.GetTaskAsync();
+                TaskList = new ObservableCollection<Tasks>(tmp);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

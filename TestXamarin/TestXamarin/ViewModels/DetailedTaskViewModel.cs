@@ -71,9 +71,14 @@ namespace TestXamarin.ViewModels
 
         void DeleteExecute()
         {
-            _database.DeleteTaskAsync(_selectedTask);
-
-            TaskList.Remove(_selectedTask);
+            try
+            {
+                _database.DeleteTaskAsync(_selectedTask);
+                TaskList.Remove(_selectedTask);
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message); 
+            }
 
             _navigationService.GoBackAsync();
         }
@@ -81,10 +86,13 @@ namespace TestXamarin.ViewModels
         bool CanDelete() => true; 
         void UpdateExecute()
         {
-            _database.SaveTaskAsync(_selectedTask);
-
-            _navigationService.GoBackAsync();
-        }
+            try {
+                _database.SaveTaskAsync(_selectedTask);
+            }catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.Message);
+                _navigationService.GoBackAsync();
+            }
 
         bool CanUpdate() => true;
     }
