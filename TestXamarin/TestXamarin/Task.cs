@@ -8,6 +8,7 @@ namespace TestXamarin
 {
     public class Task : ClassBase
     {
+        private int _id;
         private string _description;
         private DateTime _dueDate;
         private string _details;
@@ -47,8 +48,20 @@ namespace TestXamarin
                 }
             }
         }
+        public int ID
+        {
+            get { return _id; }
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    OnPropertyChanged("ID");
+                }
+            }
+        }
 
-        public Task(string desc, string details, DateTime dateTime)
+        public Task(int ID, string desc, string details, DateTime dateTime)
         {
             Description = desc;
             DueDate = dateTime;

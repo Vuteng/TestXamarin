@@ -63,10 +63,10 @@ namespace TestXamarin.ViewModels
             AddNewTaskCommand = new DelegateCommand(AddNewTaskExecute, CanAddNewTask);
             ItemTappedCommand = new DelegateCommand(ItemTappedExecute, CanItemTap);
 
-            TaskList.Add(new Task("Skuhaj kosilo","", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task("Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task("Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
-            TaskList.Add(new Task("Skuhaj kosiloSkuhaj kosilo", "", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task(TaskList.Count + 1, "Skuhaj kosilo","", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task(TaskList.Count + 1, "Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task(TaskList.Count + 1, "Skuhaj kosilo", "", new DateTime(2022, 4, 20)));
+            TaskList.Add(new Task(TaskList.Count + 1, "Skuhaj kosiloSkuhaj kosilo", "", new DateTime(2022, 4, 20)));
 
         }
 

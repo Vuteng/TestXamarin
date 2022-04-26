@@ -96,6 +96,19 @@ namespace TestXamarin.ViewModels
             }
         }
 
+        public Task SelectedTask
+        {
+            get { return _selectedTask; }
+            set
+            {
+                if (_selectedTask != value)
+                {
+                    _selectedTask = value;
+                    OnPropertyChanged("SelectedTask");
+                }
+            }
+        }
+
         public AddNewTaskViewModel(INavigationService navigationService) : base(navigationService)
         {
             AddCommand = new DelegateCommand(AddExecute, CanAdd);
@@ -117,12 +130,12 @@ namespace TestXamarin.ViewModels
             }
             else if(parameters.ContainsKey("DetailedView"))
             {
-                _selectedTask = (Task)parameters["DetailedView"];
+                SelectedTask = (Task)parameters["DetailedView"];
                 TaskList = (ObservableCollection<Task>)parameters["List"];
 
-                Description = _selectedTask.Description;
-                Details = _selectedTask.Details;
-                DueDate = _selectedTask.DueDate;
+                //Description = _selectedTask.Description;
+                //Details = _selectedTask.Details;
+                //DueDate = _selectedTask.DueDate;
 
                 Deleting = true;
                 Adding = false;
@@ -132,7 +145,7 @@ namespace TestXamarin.ViewModels
 
         void AddExecute()
         {
-            TaskList.Add(new Task(Description, Details, DueDate));
+            TaskList.Add(new Task(TaskList.Count + 1, Description, Details, DueDate)) ;
 
             _navigationService.GoBackAsync();
         }
