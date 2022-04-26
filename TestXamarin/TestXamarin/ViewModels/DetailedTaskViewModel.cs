@@ -83,17 +83,19 @@ namespace TestXamarin.ViewModels
             _navigationService.GoBackAsync();
         }
 
-        bool CanDelete() => true; 
+        bool CanDelete() => true;
         void UpdateExecute()
         {
-            try {
+            try
+            {
                 _database.SaveTaskAsync(_selectedTask);
-            }catch (Exception ex) 
-            { 
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
                 _navigationService.GoBackAsync();
             }
-
+        }
         bool CanUpdate() => true;
     }
 }
