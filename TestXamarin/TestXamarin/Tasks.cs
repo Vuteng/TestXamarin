@@ -13,6 +13,7 @@ namespace TestXamarin
         public string _description;
         public DateTime _dueDate;
         private string _details;
+
         public string Description
         {
             get { return _description; }
@@ -25,6 +26,7 @@ namespace TestXamarin
                 }
             }
         }
+
         public string Details
         {
             get { return _details; }
@@ -37,6 +39,7 @@ namespace TestXamarin
                 }
             }
         }
+
         public DateTime DueDate
         {
             get { return _dueDate; }
@@ -49,6 +52,7 @@ namespace TestXamarin
                 }
             }
         }
+
         [PrimaryKey, AutoIncrement]
         public int ID
         {

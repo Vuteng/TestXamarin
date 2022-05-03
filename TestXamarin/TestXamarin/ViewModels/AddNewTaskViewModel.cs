@@ -67,7 +67,6 @@ namespace TestXamarin.ViewModels
                 }
             }
         }
-
       
         public AddNewTaskViewModel(INavigationService navigationService, IContainer container) : base(navigationService)
         {
@@ -84,7 +83,6 @@ namespace TestXamarin.ViewModels
 
             TaskList = (ObservableCollection<Tasks>)parameters["Adding"];      
         }
-
 
         void AddExecute()
         {
@@ -103,9 +101,7 @@ namespace TestXamarin.ViewModels
             }
             _navigationService.GoBackAsync();
         }
-
-        bool CanAdd() => true; 
-      
+        bool CanAdd() => true;  
     }
 }
 

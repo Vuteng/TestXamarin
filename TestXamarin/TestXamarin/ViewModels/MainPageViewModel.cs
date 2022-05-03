@@ -16,9 +16,7 @@ namespace TestXamarin.ViewModels
         private INavigationService _navigationService;
         public DelegateCommand AddNewTaskCommand { get; private set; }
         private ObservableCollection<Tasks> _taskList;
-
         Tasks _selectedTask;
-        
         public Tasks SelectedTask
         {
             get => _selectedTask;
@@ -36,7 +34,6 @@ namespace TestXamarin.ViewModels
                 OnPropertyChanged("SelectedTask");
             }
         }
-
         public ObservableCollection<Tasks> TaskList
         {
             get { return _taskList; }
@@ -49,7 +46,6 @@ namespace TestXamarin.ViewModels
                 }
             }
         }
-
 
         public MainPageViewModel(INavigationService navigationService, IContainer container)
             : base(navigationService)
@@ -77,9 +73,7 @@ namespace TestXamarin.ViewModels
 
             _navigationService.NavigateAsync("AddNewTaskView", navParams);
         }
-
         bool CanAddNewTask() => true;
-
         async void LoadListAsync()
         {
             try

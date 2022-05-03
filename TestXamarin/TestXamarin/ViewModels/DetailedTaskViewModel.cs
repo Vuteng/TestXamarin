@@ -18,7 +18,6 @@ namespace TestXamarin.ViewModels
         private ObservableCollection<Tasks> _taskList;
         public DelegateCommand DeleteCommand { get; private set; }
         public DelegateCommand UpdateCommand { get; private set; }
-
         public Tasks SelectedTask
         {
             get { return _selectedTask; }
@@ -31,7 +30,6 @@ namespace TestXamarin.ViewModels
                 }
             }
         }
-
         public ObservableCollection<Tasks> TaskList
         {
             get { return _taskList; }
@@ -44,7 +42,6 @@ namespace TestXamarin.ViewModels
                 }
             }
         }
-
 
         public DetailedTaskViewModel(INavigationService navigationService, IContainer container) : base(navigationService)
         {
@@ -77,7 +74,6 @@ namespace TestXamarin.ViewModels
 
             _navigationService.GoBackAsync();
         }
-
         bool CanDelete() => true;
         void UpdateExecute()
         {
